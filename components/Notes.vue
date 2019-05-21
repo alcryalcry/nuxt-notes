@@ -127,6 +127,21 @@ export default {
               checked: true
             },
             {
+              id: 2131121324243223213123123,
+              text: 'Получение данных из API',
+              checked: false
+            },
+            {
+              id: 213112132424322321312312312321,
+              text: 'Сделать страницу корзины',
+              checked: false
+            },
+            {
+              id: 21232113112132424322321312312312321,
+              text: 'Добавление карточек в корзину',
+              checked: false
+            },
+            {
               id: 213123213123123,
               text: 'max-height для карточек',
               checked: false
@@ -215,6 +230,12 @@ export default {
               checked: true
             },
             {
+              id: 374747264937463,
+              text:
+                'Баг текста в канвасе: при загрузке странице изначально отрисован неправильный шрифт',
+              checked: false
+            },
+            {
               id: 1212111111132132131,
               text:
                 'Баги рандома: 2 - линии не должны сливаться и круги не стояли на одной линии',
@@ -256,38 +277,18 @@ export default {
         {
           id: 2,
           background: '',
-          title: false,
+          title: 'Webpack 4 frontend scaffolding',
           rows: [
             {
               id: 0,
-              text: 'First row in the second note',
+              text: 'Разобраться с sass-loader',
               checked: false
             },
             {
               id: 1,
-              text: 'Second row in the second note',
-              checked: true
-            },
-            {
-              id: 2,
-              text: 'Second row in the second note',
+              text: 'Минификация всего (https://github.com/webpack-contrib/mini-css-extract-plugin)',
               checked: false
             },
-            {
-              id: 3,
-              text: 'Second row in the second note',
-              checked: false
-            },
-            {
-              id: 4,
-              text: 'Second row in the second note',
-              checked: false
-            },
-            {
-              id: 5,
-              text: 'Third row in the second note',
-              checked: false
-            }
           ]
         }
       ]
