@@ -282,6 +282,11 @@ export default {
             {
               id: 0,
               text: 'Разобраться с sass-loader',
+              checked: true
+            },
+            {
+              id: 213211,
+              text: 'JSON Server',
               checked: false
             },
             {
