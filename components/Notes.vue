@@ -287,11 +287,16 @@ export default {
             {
               id: 213211,
               text: 'JSON Server',
-              checked: false
+              checked: true
             },
             {
               id: 1,
-              text: 'Минификация всего (https://github.com/webpack-contrib/mini-css-extract-plugin)',
+              text: 'Минификация всего',
+              checked: true
+            },
+            {
+              id: 2132131,
+              text: 'SVG-спрайт для Gulp',
               checked: false
             },
           ]
