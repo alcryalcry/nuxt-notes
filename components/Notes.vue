@@ -2,8 +2,8 @@
   <div class="notes">
     <div class="notes__head">
       <h1 class="title">Notes</h1>
-      <button 
-        class="notes__add" 
+      <button
+        class="notes__add"
         @click="addNote">
         <div class="notes__add-icon">
           <icon-plus />
@@ -297,7 +297,7 @@ export default {
             {
               id: 2132131,
               text: 'SVG-спрайт для Gulp',
-              checked: false
+              checked: true
             },
           ]
         }
