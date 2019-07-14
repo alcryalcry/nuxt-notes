@@ -22,9 +22,7 @@
         ref="AppNoteOne"
         :key="note.id"
         :note-index="index"
-        :background="note.background"
-        :rows="note.rows"
-        :title="note.title"
+        :note="note"
         @set-background-note="setBackgroundNote"
         @add-title="addTitle(index)"
         @add-row="addRow(index)"
@@ -125,6 +123,11 @@ export default {
               id: 34672836487234,
               text: 'isFocused (БАГИ проверить)',
               checked: true
+            },
+            {
+              id: 213112132424322321312312321321,
+              text: 'Доделать стили для placeholder',
+              checked: false
             },
             {
               id: 2131121324243223213123123,
@@ -373,7 +376,7 @@ export default {
 
     setFocusToRow(noteIndex, title) {
       setTimeout(() => {
-        // чтобы строка успела добавиться
+        // need timeout for adding row
         if (!title) {
           this.$refs.AppNoteOne[noteIndex].setFocusToRow(
             this.notes[noteIndex].rows.length
@@ -392,12 +395,10 @@ export default {
     },
 
     setUniqueId(arr) {
-      let arrIds = [];
+      let ids = arr.map(item => item.id);
       let newId = 0;
 
-      arr.forEach(item => arrIds.push(item.id));
-
-      for (let i = 0; arrIds.indexOf(i) !== -1; i++) {
+      for (let i = 0; ids.indexOf(i) !== -1; i++) {
         newId = i + 1;
       }
 

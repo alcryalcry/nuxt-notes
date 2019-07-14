@@ -1,26 +1,24 @@
 <template>
-  <div 
-    :class="[{ isFocused: isFocused }, background]" 
+  <div
+    :class="[{ isFocused: isFocused }, note.background]"
     class="note">
-    <!-- @mouseenter="isHovered = true"
-    @mouseleave="isHovered = false" -->
-
     <div class="note__title-wrapper">
       <h5
         v-show="needTitle"
         ref="title"
         class="note__title"
         contenteditable="true"
+        data-placeholder="Добавить заголовок"
         @focus="isFocused = true"
         @blur="
           inputText('title', $event);
           isFocused = false;
         "
         @keydown.enter.prevent="enterClick($event)"
-        v-text="title"
+        v-text="note.title"
       />
-      <button 
-        class="note__row-remove" 
+      <button
+        class="note__row-remove"
         @click="removeRow('title')">
         <icon-close />
       </button>
@@ -29,13 +27,13 @@
       <div class="note__content-inner">
         <div class="note__content-wrapper">
           <div
-            v-for="(row, index) in rows"
+            v-for="(row, index) in note.rows"
             :key="row.id"
             :class="{ isChecked: row.checked }"
             class="note__row"
           >
-            <button 
-              class="note__row-label" 
+            <button
+              class="note__row-label"
               @click="toggleCheckRow(index)">
               <icon-check />
             </button>
@@ -51,16 +49,16 @@
               @keydown.enter.exact.prevent="enterClick($event, index)"
               v-text="row.text"
             />
-            <button 
-              class="note__row-remove" 
+            <button
+              class="note__row-remove"
               @click="removeRow(index)">
               <icon-close />
             </button>
           </div>
         </div>
       </div>
-      <div 
-        class="note__row note__row--add" 
+      <div
+        class="note__row note__row--add"
         @click="addRow">
         <button class="note__row-label">
           <icon-plus />
@@ -68,8 +66,8 @@
         <div class="note__row-text">New item</div>
       </div>
     </div>
-    <button 
-      class="note__remove" 
+    <button
+      class="note__remove"
       @click="removeNote">
       <icon-close />
     </button>
@@ -83,14 +81,6 @@
         <icon-plus />
       </button>
       <div class="note__backgrounds-wrapper">
-        <!-- <button 
-          class="note__backgrounds-show" 
-          :class="{'isHidden': isBackgroundsOpen}" 
-          @click="isBackgroundsOpen = true">
-
-          <icon-menu />
-        </button>
-        <div class="note__backgrounds-list" :class="{'isOpen': isBackgroundsOpen}"> -->
         <div class="note__backgrounds-list isOpen">
           <button
             v-for="background in backgrounds"
@@ -121,19 +111,9 @@ export default {
     iconMenu
   },
   props: {
-    background: {
-      type: String,
-      default: ''
-    },
-    title: {
-      type: [String, Boolean],
-      default: null
-    },
-    rows: {
-      type: Array,
-      default() {
-        return [];
-      }
+    note: {
+      type: Object,
+      required: true
     },
     noteIndex: {
       type: Number,
@@ -150,15 +130,8 @@ export default {
   },
   computed: {
     needTitle() {
-      return this.title !== false;
+      return this.note.title !== false;
     }
-  },
-  watch: {
-    // isHovered(val){
-    //   if (!val) {
-    //     this.isBackgroundsOpen = false;
-    //   }
-    // }
   },
   methods: {
     inputText(rowIndex, $event) {
@@ -429,6 +402,13 @@ export default {
   &__title {
     padding: 0 4rem 1rem 2rem;
     font-size: 1.6rem;
+
+    &:empty:not(:focus):before {
+      content:attr(data-placeholder);
+      color:grey;
+      font-style:italic;
+      pointer-events: none;
+    }
 
     &:focus {
       + .note__row-remove {
