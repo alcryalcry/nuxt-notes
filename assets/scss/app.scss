@@ -1,7 +1,7 @@
 // CORE
-@import "core/reset";
-@import "core/fonts";
-@import "core/vars";
-@import "core/mixins";
-@import "core/base";
-@import "core/helpers";
+@import "core/common.scss";
+@import "core/fonts.scss";
+@import "core/grid.scss";
+@import "core/mixins.scss";
+@import "core/normalize.scss";
+@import "core/vars.scss";

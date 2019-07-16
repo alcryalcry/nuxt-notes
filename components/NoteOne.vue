@@ -10,10 +10,7 @@
         contenteditable="true"
         data-placeholder="Добавить заголовок"
         @focus="isFocused = true"
-        @blur="
-          inputText('title', $event);
-          isFocused = false;
-        "
+        @blur="inputText('title', $event); isFocused = false;"
         @keydown.enter.prevent="enterClick($event)"
         v-text="note.title"
       />
@@ -229,7 +226,7 @@ export default {
 .note {
   position: relative;
   padding: 2rem 0 0;
-  width: 28.5rem;
+  width: 100%;
   border: 1px solid $bordergray;
   border-radius: 0.5rem;
   transition: opacity $trans, transform $trans, background-color $trans;
@@ -404,9 +401,9 @@ export default {
     font-size: 1.6rem;
 
     &:empty:not(:focus):before {
-      content:attr(data-placeholder);
-      color:grey;
-      font-style:italic;
+      content: attr(data-placeholder);
+      color: $lightgray2;
+      opacity: .75;
       pointer-events: none;
     }
 

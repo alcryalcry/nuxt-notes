@@ -12,25 +12,28 @@
       </button>
     </div>
     <transition-group
-      class="notes__container"
+      class="row gut notes__container"
       mode="out-in"
       name="notes"
       tag="div"
     >
-      <app-note-one
+      <div class="col-3 col-t-6"
         v-for="(note, index) in notes"
-        ref="AppNoteOne"
         :key="note.id"
-        :note-index="index"
-        :note="note"
-        @set-background-note="setBackgroundNote"
-        @add-title="addTitle(index)"
-        @add-row="addRow(index)"
-        @remove-row="removeRow"
-        @toggle-check-row="toggleCheckRow"
-        @remove-note="removeNote(index)"
-        @input-text="inputText"
-      />
+      >
+        <app-note-one
+          ref="AppNoteOne"
+          :note-index="index"
+          :note="note"
+          @set-background-note="setBackgroundNote"
+          @add-title="addTitle(index)"
+          @add-row="addRow(index)"
+          @remove-row="removeRow"
+          @toggle-check-row="toggleCheckRow"
+          @remove-note="removeNote(index)"
+          @input-text="inputText"
+        />
+      </div>
     </transition-group>
   </div>
 </template>
@@ -125,22 +128,22 @@ export default {
               checked: true
             },
             {
-              id: 213112132424322321312312321321,
+              id: 211233112132424322321312312321321,
               text: 'Доделать стили для placeholder',
-              checked: false
+              checked: true
             },
             {
-              id: 2131121324243223213123123,
+              id: 213441121324243223213123123,
               text: 'Получение данных из API',
               checked: false
             },
             {
-              id: 213112132424322321312312312321,
+              id: 2123112132424322321312312312321,
               text: 'Сделать страницу корзины',
               checked: false
             },
             {
-              id: 21232113112132424322321312312312321,
+              id: 2123211311432132424322321312312312321,
               text: 'Добавление карточек в корзину',
               checked: false
             },
@@ -410,17 +413,6 @@ export default {
 
 <style lang="scss">
 .notes {
-  &__container {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
-    margin: -2rem 0 0 -2rem;
-
-    .note {
-      margin: 2rem 0 0 2rem;
-    }
-  }
-
   &__head {
     display: flex;
     justify-content: space-between;

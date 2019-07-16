@@ -46,7 +46,7 @@ module.exports = {
           }
         })
       }
-      
+
       // SVG Loader
       config.module.rules
         .filter(r => r.test.toString().includes('svg'))
@@ -63,13 +63,13 @@ module.exports = {
 	** Now you can use SASS (global, vars etc) in your assets
   */
  css : [
-    '@/assets/scss/core/reset.scss',
+    '@/assets/scss/core/normalize.scss',
+    '@/assets/scss/core/common.scss',
     '@/assets/scss/core/fonts.scss',
-    '@/assets/scss/core/base.scss',
-    '@/assets/scss/core/helpers.scss',
+    '@/assets/scss/core/grid.scss',
   ],
   modules: [
-    ['nuxt-sass-resources-loader', 
+    ['nuxt-sass-resources-loader',
       [
         '@/assets/scss/core/mixins.scss',
         '@/assets/scss/core/vars.scss'
