@@ -4,8 +4,7 @@
   "description": "mockapi",
   "main": "server.js",
   "scripts": {
-    "api": "json-server ./db.js --middlewares ./middlewares.js --port 3000 --static ./dist/",
-    "devapi": "json-server ./db.js --middlewares ./middlewares.js --port 3000"
+    "api": "json-server ./db.js --middlewares ./middlewares.js --port 3000"
   },
   "devDependencies": {
     "json-server": "^0.15.0"

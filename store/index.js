@@ -1,24 +1,19 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+// modules
+import sidebar from './sidebar';
+import notesList from './notes-list';
+
 Vue.use(Vuex);
 
 const store = () => new Vuex.Store({
   state: {
-    sidebarStatus: false
+    userId: 1,
   },
-  mutations: {
-    toggleSidebarStatus(state){
-      state.sidebarStatus = !state.sidebarStatus;
-    },
-    closeSidebar(state){
-      if (state.sidebarStatus === true) {
-        state.sidebarStatus = false;
-      }
-    }
-  },
-  getters: {
-    getSidebarStatus: state => state.sidebarStatus
+  modules: {
+    sidebar,
+    notesList
   }
 });
 

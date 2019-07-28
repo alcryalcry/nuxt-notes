@@ -1,14 +1,14 @@
 <template>
-  <nav 
-    v-on-clickaway="closeSidebar" 
+  <nav
+    v-on-clickaway="closeSidebar"
     class="sidebar">
-    <button 
-      class="hamburger" 
+    <button
+      class="hamburger"
       @click="toggleSidebarStatus">
       <icon-burger />
     </button>
-    <a 
-      href="https://alcryalcry.github.io/" 
+    <a
+      href="https://alcryalcry.github.io/"
       class="sidebar__logo">
       <logo-nuxt />
     </a>
@@ -20,8 +20,8 @@
       >
         <h3 class="sidebar__title">{{ section.title }}</h3>
         <ul class="sidebar__list">
-          <li 
-            v-for="(link, i) in section.items" 
+          <li
+            v-for="(link, i) in section.items"
             :key="i">
             <nuxt-link
               :to="link.href"
@@ -91,10 +91,10 @@ export default {
   },
   methods: {
     toggleSidebarStatus() {
-      this.$store.commit('toggleSidebarStatus');
+      this.$store.commit('notesList', 'toggleSidebarStatus');
     },
     closeSidebar() {
-      this.$store.commit('closeSidebar');
+      this.$store.commit('notesList', 'closeSidebar');
     }
   }
 };

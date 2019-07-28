@@ -16,7 +16,7 @@ export default {
     AppSidebar
   },
   computed: {
-    ...mapGetters([
+    ...mapGetters('sidebar', [
       'getSidebarStatus'
     ]),
     scrollBarOptions(){

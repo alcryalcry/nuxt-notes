@@ -8,6 +8,10 @@ const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
 module.exports = {
   mode: 'universal',
 
+  server: {
+    port: 8080,
+  },
+
   /*
   ** Headers of the page
   */
@@ -34,8 +38,12 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
+    filenames: {
+      chunk: '[name].js'
+    },
 		extend(config, { isDev, isClient }) {
 			if (isDev && isClient) {
+        config.devtool = '#source-map'
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,

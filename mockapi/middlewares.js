@@ -1,27 +1,10 @@
-// const test2 = require('./routes/test-2.js');
+const notesList = require('./routes/notes-list.js');
 
 module.exports = (req, res, next) => {
-  // if (req.originalUrl.includes('/test')) {
-    
-  //   // POST
-  //   if (req.body.test === 0) {
-  //     res.jsonp({
-  //       status: true
-  //     });
-  //     return;
-  //   }
-
-  //   // GET
-  //   // req.query;
-
-  //   // from file
-  // test2(params, res);
-
-
-  //   res.jsonp({
-  //     status: false
-  //   });
-  //   return;
-  // }
+  if (req.originalUrl.includes('api/notes_list')) {
+    const params = req.body;
+    notesList(params, res);
+    return;
+  }
   next();
 };
