@@ -1,8 +1,8 @@
-<template>
-  <div :class="{'isSidebarOpen': getSidebarStatus}">
-    <app-sidebar />
-    <nuxt class="page-content" />
-  </div>
+<template lang="pug">
+  div(:class="{'isSidebarOpen': getSidebarStatus}")
+    app-sidebar
+    nuxt(class="page-content")
+
 </template>
 
 <script>

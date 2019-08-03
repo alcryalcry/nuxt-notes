@@ -1,11 +1,9 @@
-<template>
-  <div>
-    <section class="section">
-      <div class="container">
-        <h1 class="title">Page under contruction</h1>
-      </div>
-    </section>
-  </div>
+<template lang="pug">
+  div
+    section.section
+      .container
+        h1.title Page under contruction
+
 </template>
 
 <script>

@@ -1,11 +1,9 @@
-<template>
-  <div>
-    <section class="section">
-      <div class="container">
-        <app-notes />
-      </div>
-    </section>
-  </div>
+<template lang="pug">
+  div
+    section.section
+      .container
+        app-notes
+
 </template>
 
 <script>

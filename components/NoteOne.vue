@@ -1,96 +1,64 @@
-<template>
-  <div
-    :class="[{ isFocused: isFocused }, note.background]"
-    class="note">
-    <div class="note__title-wrapper">
-      <h5
-        v-show="needTitle"
-        ref="title"
-        class="note__title"
+<template lang="pug">
+  .note(:class="[{ isFocused: isFocused }, note.background]")
+
+    .note__title-wrapper
+      h5.note__title(
         contenteditable="true"
         data-placeholder="Добавить заголовок"
+        ref="title"
+        v-show="needTitle"
+        v-text="note.title"
         @focus="isFocused = true"
         @blur="inputText('title', $event); isFocused = false;"
         @keydown.enter.prevent="enterClick($event)"
-        v-text="note.title"
-      />
-      <button
-        class="note__row-remove"
-        @click="removeRow('title')">
-        <icon-close />
-      </button>
-    </div>
-    <div class="note__content">
-      <div class="note__content-inner">
-        <div class="note__content-wrapper">
-          <div
+      )
+      button.note__row-remove(@click="removeRow('title')")
+        icon-close
+
+    .note__content
+      .note__content-inner
+        .note__content-wrapper
+          .note__row(
             v-for="(row, index) in note.rows"
             :key="row.id"
             :class="{ isChecked: row.checked }"
-            class="note__row"
-          >
-            <button
-              class="note__row-label"
-              @click="toggleCheckRow(index)">
-              <icon-check />
-            </button>
-            <div
+          )
+            button.note__row-label(@click="toggleCheckRow(index)")
+              icon-check
+            .note__row-text(
               ref="rows"
-              class="note__row-text"
               contenteditable="true"
               @focus="isFocused = true"
-              @blur="
-                inputText(index, $event);
-                isFocused = false;
-              "
+              @blur=" inputText(index, $event); isFocused = false; "
               @keydown.enter.exact.prevent="enterClick($event, index)"
               v-text="row.text"
-            />
-            <button
-              class="note__row-remove"
-              @click="removeRow(index)">
-              <icon-close />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div
-        class="note__row note__row--add"
-        @click="addRow">
-        <button class="note__row-label">
-          <icon-plus />
-        </button>
-        <div class="note__row-text">New item</div>
-      </div>
-    </div>
-    <button
-      class="note__remove"
-      @click="removeNote">
-      <icon-close />
-    </button>
-    <div class="note__actions">
-      <button
-        :class="{ isHidden: needTitle }"
-        class="note__title-button"
+            )
+            button.note__row-remove(@click="removeRow(index)")
+              icon-close
+      .note__row.note__row--add(@click="addRow")
+        button.note__row-label
+          icon-plus
+        .note__row-text New item
+
+    .note__remove(@click="removeNote")
+      icon-close
+
+    .note__actions
+      button.note__title-button(
         title="Добавить заголовок"
+        :class="{ isHidden: needTitle }"
         @click="addTitle"
-      >
-        <icon-plus />
-      </button>
-      <div class="note__backgrounds-wrapper">
-        <div class="note__backgrounds-list isOpen">
-          <button
+      )
+        icon-plus
+      .note__backgrounds-wrapper
+        .note__backgrounds-list.isOpen
+          button.note__background(
+            title="Сделать фоновым цветом"
             v-for="background in backgrounds"
             :key="background"
             :class="background"
-            class="note__background"
-            title="Сделать фоновым цветом"
             @click="setBackgroundNote(background)"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
+          )
 </template>
 
 <script>

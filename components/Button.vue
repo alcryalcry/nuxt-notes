@@ -1,10 +1,9 @@
-<template>
-  <button 
-    :type="type" 
-    class="button" 
+<template lang="pug">
+  button.button(
+    :type="type"
     @click="$emit('clickAction')">
-    <slot>Button</slot>
-  </button>
+  )
+    slot Button
 </template>
 
 <script>

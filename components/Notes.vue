@@ -1,28 +1,23 @@
-<template>
-  <div class="notes">
-    <div class="notes__head">
-      <h1 class="title">Notes</h1>
-      <button
-        class="notes__add"
-        @click="addNote">
-        <div class="notes__add-icon">
-          <icon-plus />
-        </div>
-        New note
-      </button>
-    </div>
-    <transition-group
-      class="row gut notes__container"
+<template lang="pug">
+  .notes
+    .notes__head
+      .title Notes
+      button.notes__add(@click="addNote")
+        .notes__add-icon
+          icon-plus
+        | New note
+
+    transition-group.row.gut.notes__container(
       mode="out-in"
       name="notes"
       tag="div"
       v-if="getNotesList"
-    >
-      <div class="col-3 col-t-6"
+    )
+      .col-3.col-t-6(
         v-for="(note, index) in getNotesList"
         :key="note.id"
-      >
-        <app-note-one
+      )
+        app-note-one(
           ref="AppNoteOne"
           :note-index="index"
           :note="note"
@@ -33,10 +28,7 @@
           @toggle-check-row="toggleCheckRow"
           @remove-note="removeNote(index)"
           @input-text="inputText"
-        />
-      </div>
-    </transition-group>
-  </div>
+        )
 </template>
 
 <script>

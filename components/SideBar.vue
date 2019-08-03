@@ -1,53 +1,27 @@
-<template>
-  <nav
-    v-on-clickaway="closeSidebar"
-    class="sidebar">
-    <button
-      class="hamburger"
-      @click="toggleSidebarStatus">
-      <icon-burger />
-    </button>
-    <a
-      href="https://alcryalcry.github.io/"
-      class="sidebar__logo">
-      <logo-nuxt />
-    </a>
-    <div class="sidebar__section-wrapper">
-      <div
-        v-for="(section, i) in menuSections"
-        :key="i"
-        class="sidebar__section"
-      >
-        <h3 class="sidebar__title">{{ section.title }}</h3>
-        <ul class="sidebar__list">
-          <li
-            v-for="(link, i) in section.items"
-            :key="i">
-            <nuxt-link
-              :to="link.href"
-              class="sidebar__link"
-              @click.native="closeSidebar"
-            >
-              <span class="sidebar__link-icon">
-                <component :is="link.icon" />
-              </span>
-              <span class="sidebar__link-text">{{ link.text }}</span>
-            </nuxt-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <a
-      class="sidebar__bottom"
+<template lang="pug">
+  nav.sidebar(v-on-clickaway="closeSidebar")
+    button.hamburger(@click="toggleSidebarStatus")
+      icon-burger
+    a.sidebar__logo(href="https://alcryalcry.github.io/")
+      logo-nuxt
+    .sidebar__section-wrapper
+      .sidebar__section( v-for="(section, i) in menuSections" :key="i" )
+        .sidebar__title {{ section.title }}
+        .sidebar__list
+          li( v-for="(link, i) in section.items" :key="i" )
+            nuxt-link.sidebar__link( :to="link.href" @click.native="closeSidebar" )
+              .sidebar__link-icon
+                component(:is="link.icon")
+              .sidebar__link-text {{ link.text }}
+
+    a.sidebar__bottom(
       href="https://github.com/alcryalcry"
       target="_blank"
-    >
-      <span class="sidebar__bottom-icon">
-        <icon-git />
-      </span>
-      <span class="sidebar__bottom-text">I'm on <br >GitHub</span>
-    </a>
-  </nav>
+    )
+      .sidebar__bottom-icon
+        icon-git
+      .sidebar__bottom-text I'm on <br >GitHub
+
 </template>
 
 <script>
