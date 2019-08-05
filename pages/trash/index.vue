@@ -2,16 +2,16 @@
   div
     section.section
       .container
-        h1.title Page under contruction
+        app-trash
 
 </template>
 
 <script>
-import AppNotes from '~/components/Notes.vue'
+import AppTrash from '~/components/Trash.vue'
 
 export default {
 	components: {
-		AppNotes
+		AppTrash
 	}
 }
 </script>

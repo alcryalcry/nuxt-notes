@@ -14,7 +14,10 @@ const store = () => new Vuex.Store({
   modules: {
     sidebar,
     notesList
-  }
+  },
+  getters: {
+    getUserId: state => state.userId,
+  },
 });
 
 export default store;

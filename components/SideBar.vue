@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 import { mixin as clickaway } from 'vue-clickaway';
 import iconBurger from '~/assets/svg/burger.svg';
 import iconGit from '~/assets/svg/github.svg';
@@ -64,12 +66,10 @@ export default {
     };
   },
   methods: {
-    toggleSidebarStatus() {
-      this.$store.commit('notesList', 'toggleSidebarStatus');
-    },
-    closeSidebar() {
-      this.$store.commit('notesList', 'closeSidebar');
-    }
+    ...mapMutations('sidebar', [
+      'toggleSidebarStatus',
+      'closeSidebar'
+    ]),
   }
 };
 </script>
@@ -179,6 +179,10 @@ export default {
 
   &__list {
     padding: 0;
+
+    li {
+      list-style: none;
+    }
   }
 
   &__title {

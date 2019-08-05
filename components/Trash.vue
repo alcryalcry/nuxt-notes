@@ -2,7 +2,7 @@
   .notes(:class="{ isReady }")
     .preloader(v-if="!isReady")
     .notes__head
-      .title Notes
+      .title Trash
       .notes__head-actions
         transition-group.notes__head-info(
           mode="out-in"
@@ -15,21 +15,17 @@
             .preloader 
           div(:key="2" v-else)
             span Изменения сохранены
-        button.notes__add(@click="addNote")
-          .notes__add-icon
-            icon-plus
-          | New note
 
     transition-group.row.gut.notes__container(
       mode="out-in"
       name="notes"
       tag="div"
-      v-if="notes"
+      v-if="notes.length"
     )
       .col-3.col-t-6(
         v-for="(note, index) in notes"
         :key="note.id"
-        v-if="!note.trash"
+        v-if="note.trash"
       )
         app-note-one(
           ref="AppNoteOne"
@@ -40,10 +36,10 @@
           @add-row="addRow(index)"
           @remove-row="removeRow"
           @toggle-check-row="toggleCheckRow"
-          @remove-note="removeNoteToTrash(index)"
+          @remove-note="removeNoteAlways(index)"
           @input-text="inputText"
         )
-          //- @remove-note="removeNoteAlways(index)"
+    .title(v-else) Корзина пуста
 </template>
 
 <script>
@@ -61,7 +57,7 @@ export default {
   mixins: [notesActions],
   created() {
     this.getServerData().then(res => {
-      this.notes = [...res.notes].filter(item => item.trash === false);
+      this.notes = [...res.notes].filter(item => item.trash === true);
       this.isReady = true;
       this.$nextTick(() => {
         this.isFirstLoad = false;

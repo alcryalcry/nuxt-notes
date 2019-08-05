@@ -86,16 +86,16 @@ module.exports = function (params, res) {
         {
           id: 213441121324243223213123123,
           text: 'Получение данных из API',
-          checked: false
-        },
-        {
-          id: 2123112132424322321312312312321,
-          text: 'Сделать страницу корзины',
-          checked: false
+          checked: true
         },
         {
           id: 2123211311432132424322321312312312321,
           text: 'Добавление карточек в корзину',
+          checked: true
+        },
+        {
+          id: 2123112132424322321312312312321,
+          text: 'Сделать страницу корзины',
           checked: false
         },
         {
@@ -104,13 +104,13 @@ module.exports = function (params, res) {
           checked: false
         },
         {
-          id: 9111,
-          text: 'Добавление изображений из буфера',
+          id: 777777,
+          text: 'Обработка ошибок при потере соединения (localStorage итд)',
           checked: false
         },
         {
-          id: 1232131232138127983721893,
-          text: 'Удаление строки с изображением',
+          id: 13,
+          text: 'Хранение данных в MongoDb',
           checked: false
         },
         {
@@ -120,13 +120,7 @@ module.exports = function (params, res) {
         },
         {
           id: 12,
-          text:
-            'Мобильный интерфейс (не забыть про добавление/удаление изображений)',
-          checked: false
-        },
-        {
-          id: 13,
-          text: 'Хранение данных',
+          text: 'Мобильный интерфейс',
           checked: false
         },
         {
@@ -137,17 +131,7 @@ module.exports = function (params, res) {
         {
           id: 14,
           text: '(Необязательно) Оповещения о сохраненных изменениях',
-          checked: false
-        },
-        {
-          id: 911112213213,
-          text: '(Необязательно) Перетаскивание карточек',
-          checked: false
-        },
-        {
-          id: 911112,
-          text: '(Необязательно)   Написать документацию (описание)',
-          checked: false
+          checked: true
         }
       ]
     },
@@ -259,10 +243,23 @@ module.exports = function (params, res) {
           checked: true
         },
       ]
+    },
+    {
+      id: 3,
+      background: '',
+      title: 'Карточка из корзины',
+      trash: true,
+      rows: []
+    },
+    {
+      id: 4,
+      background: '',
+      title: 'Карточка из корзины',
+      trash: true,
+      rows: []
     }
   ]
 
-  console.log(notes);
   res.jsonp({
     notes
   });
