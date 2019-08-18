@@ -27,12 +27,12 @@
 <script>
 import { mapMutations } from 'vuex'
 
-import { mixin as clickaway } from 'vue-clickaway';
-import iconBurger from '~/assets/svg/burger.svg';
-import iconGit from '~/assets/svg/github.svg';
-import iconNotes from '~/assets/svg/notes.svg';
-import iconTrash from '~/assets/svg/trash.svg';
-import logoNuxt from '~/assets/svg/logo-nuxt.svg';
+import { mixin as clickaway } from 'vue-clickaway'
+import iconBurger from '~/assets/svg/burger.svg'
+import iconGit from '~/assets/svg/github.svg'
+import iconNotes from '~/assets/svg/notes.svg'
+import iconTrash from '~/assets/svg/trash.svg'
+import logoNuxt from '~/assets/svg/logo-nuxt.svg'
 
 export default {
   name: 'Sidebar',
@@ -44,7 +44,7 @@ export default {
     logoNuxt
   },
   mixins: [clickaway],
-  data() {
+  data () {
     return {
       menuSections: [
         {
@@ -63,7 +63,7 @@ export default {
           ]
         }
       ]
-    };
+    }
   },
   methods: {
     ...mapMutations({
@@ -75,7 +75,7 @@ export default {
     //   'closeSidebar'
     // ]),
   }
-};
+}
 </script>
 
 <style lang="scss">

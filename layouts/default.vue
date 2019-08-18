@@ -6,10 +6,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock'
 import AppSidebar from '~/components/Sidebar/Sidebar.vue'
-import { mapGetters } from 'vuex';
-import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
-
 
 export default {
   components: {
@@ -19,24 +18,22 @@ export default {
     ...mapGetters({
       getSidebarStatus: 'sidebar/getSidebarStatus'
     }),
-    scrollBarOptions(){
+    scrollBarOptions () {
       return {
         reserveScrollBarGap: true
       }
     }
   },
   watch: {
-    getSidebarStatus(value) {
+    getSidebarStatus (value) {
       if (value) {
-        disableBodyScroll(document.querySelector('body'), this.scrollBarOptions);
-        return false;
+        disableBodyScroll(document.querySelector('body'), this.scrollBarOptions)
+        return false
       }
-      clearAllBodyScrollLocks();
+      clearAllBodyScrollLocks()
     }
   }
 }
 </script>
 
 <style lang="scss"></style>
-
-

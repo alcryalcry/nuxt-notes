@@ -1,41 +1,42 @@
-import { HTTP } from '../plugins/http';
-import { API_ROUTES_NOTES_LIST_GET, API_ROUTES_NOTES_LIST_SET } from '../plugins/constants';
+/* eslint-disable import/named */
+import { HTTP } from '../plugins/http'
+import { API_ROUTES_NOTES_LIST_GET, API_ROUTES_NOTES_LIST_SET } from '../plugins/constants'
 
 export const state = () => ({
-  notesList: [],
-});
+  notesList: []
+})
 
 export const getters = {
-  getNotesList: state => state.notesList,
-};
+  getNotesList: state => state.notesList
+}
 
 export const mutations = {
-  setNotesList(state, data) {
-    state.notesList = [...JSON.parse(JSON.stringify(data))];
-  },
-};
+  setNotesList (state, data) {
+    state.notesList = [...JSON.parse(JSON.stringify(data))]
+  }
+}
 
 export const actions = {
-  getServerData({ commit }, userId) {
+  getServerData ({ commit }, userId) {
     return HTTP.get(API_ROUTES_NOTES_LIST_GET, { user_id: userId })
       .then(({ data }) => {
-        commit('setNotesList', data.notes);
-        return data;
+        commit('setNotesList', data.notes)
+        return data
       })
-      .catch(error => console.error(API_ROUTES_NOTES_LIST_GET, error));
+      .catch(error => console.error(API_ROUTES_NOTES_LIST_GET, error))
   },
   // eslint-disable-next-line no-unused-vars
-  sendDataToServer({ commit, getters }, userId) {
-    return HTTP.post(API_ROUTES_NOTES_LIST_SET, { 
+  sendDataToServer ({ commit, getters }, userId) {
+    return HTTP.post(API_ROUTES_NOTES_LIST_SET, {
       user_id: userId,
       notes: getters.getNotesList
     })
-    .then(({ data }) => {
-      return data;
-    })
-    .catch(error => console.error(API_ROUTES_NOTES_LIST_SET, error));
-  },
-};
+      .then(({ data }) => {
+        return data
+      })
+      .catch(error => console.error(API_ROUTES_NOTES_LIST_SET, error))
+  }
+}
 
 export default {
   state,

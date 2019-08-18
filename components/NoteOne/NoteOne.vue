@@ -62,10 +62,10 @@
 </template>
 
 <script>
-import iconCheck from '~/assets/svg/check.svg';
-import iconClose from '~/assets/svg/close.svg';
-import iconPlus from '~/assets/svg/plus.svg';
-import iconMenu from '~/assets/svg/menu.svg';
+import iconCheck from '~/assets/svg/check.svg'
+import iconClose from '~/assets/svg/close.svg'
+import iconPlus from '~/assets/svg/plus.svg'
+import iconMenu from '~/assets/svg/menu.svg'
 
 export default {
   name: 'NoteOne',
@@ -85,93 +85,92 @@ export default {
       default: null
     }
   },
-  data() {
+  data () {
     return {
       isFocused: false,
       isHovered: false,
       isBackgroundsOpen: false,
       backgrounds: ['', 'isCyan', 'isYellow', 'isGreen', 'isPink']
-    };
+    }
   },
   computed: {
-    needTitle() {
-      return this.note.title !== false;
+    needTitle () {
+      return this.note.title !== false
     }
   },
   methods: {
-    inputText(rowIndex, $event) {
+    inputText (rowIndex, $event) {
       this.$emit('input-text', [
         this.noteIndex,
         rowIndex,
-        $event.currentTarget.innerText
-      ]);
+        $event.currentTarget.textContent
+      ])
     },
 
-    toggleCheckRow(rowIndex) {
-      this.$emit('toggle-check-row', [rowIndex, this.noteIndex]);
+    toggleCheckRow (rowIndex) {
+      this.$emit('toggle-check-row', [rowIndex, this.noteIndex])
     },
 
-    setCursorToEnd(el) {
-      if (!el.innerText.length) {
-        return;
+    setCursorToEnd (el) {
+      if (!el.textContent.length) {
+        return
       }
 
-      let range = document.createRange();
-      let sel = window.getSelection();
-      range.setStart(el.childNodes[0], el.innerText.length);
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
+      const range = document.createRange()
+      const sel = window.getSelection()
+      range.setStart(el.childNodes[0], el.textContent.length)
+      range.collapse(true)
+      sel.removeAllRanges()
+      sel.addRange(range)
     },
 
-    enterClick(e, index) {
+    enterClick (e, index) {
       if (e.target === this.$refs.title) {
-        this.$refs.rows[0].focus();
-        this.setCursorToEnd(this.$refs.rows[0]);
-        return;
+        this.$refs.rows[0].focus()
+        this.setCursorToEnd(this.$refs.rows[0])
+        return
       }
 
       if (index < this.$refs.rows.length - 1) {
-        this.$refs.rows[index + 1].focus();
-        this.setCursorToEnd(this.$refs.rows[index + 1]);
-        return;
+        this.$refs.rows[index + 1].focus()
+        this.setCursorToEnd(this.$refs.rows[index + 1])
+        return
       }
 
       if (index === this.$refs.rows.length - 1) {
-        this.addRow();
-        return;
+        this.addRow()
       }
     },
 
-    addTitle() {
-      this.$emit('add-title');
+    addTitle () {
+      this.$emit('add-title')
     },
 
-    addRow() {
-      this.$emit('add-row');
+    addRow () {
+      this.$emit('add-row')
     },
 
-    setFocusToRow(data) {
+    setFocusToRow (data) {
       if (data === 'title') {
-        this.$refs.title.focus();
-        return;
+        this.$refs.title.focus()
+        return
       }
-      this.$refs.rows[data - 1].focus();
+      this.$refs.rows[data - 1].focus()
     },
 
-    removeRow(rowIndex) {
-      this.$emit('remove-row', [rowIndex, this.noteIndex]);
+    removeRow (rowIndex) {
+      this.$emit('remove-row', [rowIndex, this.noteIndex])
     },
 
-    removeNote() {
-      this.$emit('remove-note');
+    removeNote () {
+      this.$emit('remove-note')
     },
 
-    setBackgroundNote(background) {
-      this.$emit('set-background-note', [this.noteIndex, background]);
+    setBackgroundNote (background) {
+      this.$emit('set-background-note', [this.noteIndex, background])
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

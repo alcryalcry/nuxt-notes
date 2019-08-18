@@ -10,8 +10,8 @@
 import AppTrash from '~/components/Trash/Trash.vue'
 
 export default {
-	components: {
-		AppTrash
-	}
+  components: {
+    AppTrash
+  }
 }
 </script>

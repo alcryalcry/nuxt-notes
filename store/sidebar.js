@@ -1,21 +1,21 @@
 export const state = () => ({
   sidebarStatus: false
-});
+})
 
 export const getters = {
-  getSidebarStatus: state => state.sidebarStatus,
-};
+  getSidebarStatus: state => state.sidebarStatus
+}
 
 export const mutations = {
-  toggleSidebarStatus(state){
-    state.sidebarStatus = !state.sidebarStatus;
+  toggleSidebarStatus (state) {
+    state.sidebarStatus = !state.sidebarStatus
   },
-  closeSidebar(state){
+  closeSidebar (state) {
     if (state.sidebarStatus === true) {
-      state.sidebarStatus = false;
+      state.sidebarStatus = false
     }
   }
-};
+}
 
 export default {
   state,

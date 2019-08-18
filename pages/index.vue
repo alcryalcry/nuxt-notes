@@ -10,8 +10,8 @@
 import AppNotes from '~/components/Notes/Notes.vue'
 
 export default {
-	components: {
-		AppNotes
-	}
+  components: {
+    AppNotes
+  }
 }
 </script>

@@ -12,7 +12,7 @@
         )
           div(:key="1" v-if="isSaving")
             span Saving...
-            .preloader 
+            .preloader
           div(:key="2" v-else)
             span Changes saved
 
@@ -43,10 +43,9 @@
 </template>
 
 <script>
-import AppNoteOne from '~/components/NoteOne/NoteOne.vue';
-import iconPlus from '~/assets/svg/plus.svg';
-import notesActions from '~/plugins/notesActions';
-
+import AppNoteOne from '~/components/NoteOne/NoteOne.vue'
+import iconPlus from '~/assets/svg/plus.svg'
+import notesActions from '~/plugins/notesActions'
 
 export default {
   name: 'Notes',
@@ -55,16 +54,16 @@ export default {
     iconPlus
   },
   mixins: [notesActions],
-  created() {
-    this.getServerData().then(res => {
-      this.notes = JSON.parse(JSON.stringify(res.notes)).filter(item => item.trash === true);
-      this.isReady = true;
+  created () {
+    this.getServerData().then((res) => {
+      this.notes = JSON.parse(JSON.stringify(res.notes)).filter(item => item.trash === true)
+      this.isReady = true
       this.$nextTick(() => {
-        this.isFirstLoad = false;
+        this.isFirstLoad = false
       })
     })
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss">

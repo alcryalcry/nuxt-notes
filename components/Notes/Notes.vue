@@ -12,7 +12,7 @@
         )
           div(:key="1" v-if="isSaving")
             span Saving...
-            .preloader 
+            .preloader
           div(:key="2" v-else)
             span Changes saved
         button.notes__add(@click="addNote")
@@ -47,10 +47,9 @@
 </template>
 
 <script>
-import AppNoteOne from '~/components/NoteOne/NoteOne.vue';
-import iconPlus from '~/assets/svg/plus.svg';
-import notesActions from '~/plugins/notesActions';
-
+import AppNoteOne from '~/components/NoteOne/NoteOne.vue'
+import iconPlus from '~/assets/svg/plus.svg'
+import notesActions from '~/plugins/notesActions'
 
 export default {
   name: 'Notes',
@@ -60,11 +59,11 @@ export default {
   },
   mixins: [notesActions],
   computed: {
-    notesFiltered() {
-      return this.notes.filter(item => !item.trash);
+    notesFiltered () {
+      return this.notes.filter(item => !item.trash)
     }
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss">
