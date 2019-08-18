@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppSidebar from '~/components/Sidebar.vue'
+import AppSidebar from '~/components/Sidebar/Sidebar.vue'
 import { mapGetters } from 'vuex';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
@@ -16,9 +16,9 @@ export default {
     AppSidebar
   },
   computed: {
-    ...mapGetters('sidebar', [
-      'getSidebarStatus'
-    ]),
+    ...mapGetters({
+      getSidebarStatus: 'sidebar/getSidebarStatus'
+    }),
     scrollBarOptions(){
       return {
         reserveScrollBarGap: true

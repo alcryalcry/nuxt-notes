@@ -2,12 +2,12 @@
   div
     section.section
       .container
-        app-trash
+        //- app-trash
 
 </template>
 
 <script>
-import AppTrash from '~/components/Trash.vue'
+import AppTrash from '~/components/Trash/Trash.vue'
 
 export default {
 	components: {

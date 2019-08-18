@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import AppNotes from '~/components/Notes.vue'
+import AppNotes from '~/components/Notes/Notes.vue'
 
 export default {
 	components: {

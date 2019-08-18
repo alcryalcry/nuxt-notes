@@ -70,19 +70,11 @@ module.exports = {
 	/*
 	** Now you can use SASS (global, vars etc) in your assets
   */
- css : [
-    '@/assets/scss/core/normalize.scss',
-    '@/assets/scss/core/common.scss',
-    '@/assets/scss/core/fonts.scss',
-    '@/assets/scss/core/grid.scss',
-  ],
-  modules: [
-    ['nuxt-sass-resources-loader',
-      [
-        '@/assets/scss/core/mixins.scss',
-        '@/assets/scss/core/vars.scss'
-      ]
+  modules: ['@nuxtjs/style-resources'],
+  styleResources: {
+    scss: [
+      'assets/scss/app.scss'
     ]
-  ]
+  },
 };
 

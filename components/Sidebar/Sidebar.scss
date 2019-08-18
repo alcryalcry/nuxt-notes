@@ -1,80 +1,3 @@
-<template lang="pug">
-  nav.sidebar(v-on-clickaway="closeSidebar")
-    button.hamburger(@click="toggleSidebarStatus")
-      icon-burger
-    a.sidebar__logo(href="https://alcryalcry.github.io/")
-      logo-nuxt
-    .sidebar__section-wrapper
-      .sidebar__section( v-for="(section, i) in menuSections" :key="i" )
-        .sidebar__title {{ section.title }}
-        .sidebar__list
-          li( v-for="(link, i) in section.items" :key="i" )
-            nuxt-link.sidebar__link( :to="link.href" @click.native="closeSidebar" )
-              .sidebar__link-icon
-                component(:is="link.icon")
-              .sidebar__link-text {{ link.text }}
-
-    a.sidebar__bottom(
-      href="https://github.com/alcryalcry"
-      target="_blank"
-    )
-      .sidebar__bottom-icon
-        icon-git
-      .sidebar__bottom-text I'm on <br >GitHub
-
-</template>
-
-<script>
-import { mapMutations } from 'vuex'
-
-import { mixin as clickaway } from 'vue-clickaway';
-import iconBurger from '~/assets/svg/burger.svg';
-import iconGit from '~/assets/svg/github.svg';
-import iconNotes from '~/assets/svg/notes.svg';
-import iconTrash from '~/assets/svg/trash.svg';
-import logoNuxt from '~/assets/svg/logo-nuxt.svg';
-
-export default {
-  name: 'Sidebar',
-  components: {
-    iconBurger,
-    iconGit,
-    iconNotes,
-    iconTrash,
-    logoNuxt
-  },
-  mixins: [clickaway],
-  data() {
-    return {
-      menuSections: [
-        {
-          title: 'Views',
-          items: [
-            {
-              href: '/',
-              text: 'Notes',
-              icon: iconNotes
-            },
-            {
-              href: '/trash',
-              text: 'Trash',
-              icon: iconTrash
-            }
-          ]
-        }
-      ]
-    };
-  },
-  methods: {
-    ...mapMutations('sidebar', [
-      'toggleSidebarStatus',
-      'closeSidebar'
-    ]),
-  }
-};
-</script>
-
-<style lang="scss">
 .sidebar {
   z-index: 10;
   position: fixed;
@@ -90,7 +13,7 @@ export default {
   transform: translateX(-100%);
   transition: transform 0.3s $easeOutCubic, opacity 0.3s 0.3s $easeOutCubic;
 
-  @include mq(767) {
+  @include mobile {
     width: 26rem;
   }
 
@@ -110,7 +33,7 @@ export default {
     color: $lightgray2;
     cursor: pointer;
 
-    @include mq(1024, 9999) {
+    @include desktop {
       &:hover {
         &::before {
           background-color: $lightgray;
@@ -118,7 +41,7 @@ export default {
       }
     }
 
-    @include mq(767) {
+    @include mobile {
       top: 0.75rem;
       left: calc(100% + 0.75rem);
       width: 4.5rem;
@@ -136,7 +59,7 @@ export default {
       background-color: transparent;
       transition: background-color $trans;
 
-      @include mq(767) {
+      @include mobile {
         content: none;
       }
     }
@@ -160,7 +83,7 @@ export default {
       height: 4.5rem;
     }
 
-    @include mq(1024, 9999) {
+    @include desktop {
       &:hover {
         filter: grayscale(100%);
       }
@@ -203,14 +126,14 @@ export default {
     &.nuxt-link-exact-active {
       background: $lightgray;
 
-      @include mq(1024, 9999) {
+      @include desktop {
         &:hover {
           background: darken($lightgray, 3%);
         }
       }
     }
 
-    @include mq(1024, 9999) {
+    @include desktop {
       &:hover {
         background: $lightgray;
       }
@@ -233,7 +156,7 @@ export default {
     padding: 2.4rem;
     border-top: 1px solid $bordergray;
 
-    @include mq(1024, 9999) {
+    @include desktop {
       &:hover {
         .sidebar__bottom-icon {
           color: $black;
@@ -260,4 +183,3 @@ export default {
     transition: color $trans;
   }
 }
-</style>

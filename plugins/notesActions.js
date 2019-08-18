@@ -1,5 +1,9 @@
-import { mapActions, mapMutations } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 import { debounce } from 'throttle-debounce'
+
+
+// ЭТОТ МИКСИН НУЖЕН, ЧТОБЫ НЕ ПОВТОРЯТЬ МЕТОДЫ В ДВУХ КОМПОНЕНТАХ
+
 
 export default {
   data: () => ({
@@ -9,11 +13,20 @@ export default {
     isShowInfo: false,
     isReady: false
   }),
+  created() {
+    this.getServerData().then(() => {
+      this.notes = JSON.parse(JSON.stringify(this.getNotesList()));
+      this.isReady = true;
+      this.$nextTick(() => {
+        this.isFirstLoad = false;
+      })
+    })
+  },
   mounted() {
     this.debounceSendData = debounce(1500, () => {
-      this.setNotesList(this.notes)
+      this.setNotesList(JSON.parse(JSON.stringify(this.notes)))
       this.sendDataToServer().then(res => {
-        console.log('ИЗМЕНЕНИЯ СОХРАНЕНЫ', res);
+        console.log('CHANGES SAVED!', res);
       })
       .catch(error => {
         console.error(error);
@@ -37,8 +50,16 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('notesList', ['setNotesList']),
-    ...mapActions('notesList', ['getServerData', 'sendDataToServer']),
+    ...mapGetters({
+      getNotesList: 'notesList/getNotesList'
+    }),
+    ...mapMutations({
+      setNotesList: 'notesList/setNotesList'
+    }),
+    ...mapActions({
+      getServerData: 'notesList/getServerData',
+      sendDataToServer: 'notesList/sendDataToServer',
+    }),
 
     inputText(data) {
       const noteIndex = data[0];
