@@ -2,7 +2,7 @@
   div
     section.section
       .container
-        //- app-trash
+        app-trash
 
 </template>
 

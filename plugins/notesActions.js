@@ -1,5 +1,6 @@
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import { debounce } from 'throttle-debounce'
+import grid from '~/plugins/grid'
 
 // ЭТОТ МИКСИН НУЖЕН, ЧТОБЫ НЕ ПОВТОРЯТЬ МЕТОДЫ В ДВУХ КОМПОНЕНТАХ
 
@@ -17,11 +18,12 @@ export default {
       this.isReady = true
       this.$nextTick(() => {
         this.isFirstLoad = false
+        grid(this.$refs.gridItems)
       })
     })
   },
   mounted () {
-    this.debounceSendData = debounce(1500, () => {
+    this.debounceSendData = debounce(1000, () => {
       this.setNotesList(JSON.parse(JSON.stringify(this.notes)))
       this.sendDataToServer().then((res) => {
         console.log('CHANGES SAVED!', res)
@@ -43,6 +45,7 @@ export default {
 
         this.isSaving = true
         this.debounceSendData(val)
+        grid(this.$refs.gridItems)
       },
       deep: true
     }
@@ -59,27 +62,43 @@ export default {
       sendDataToServer: 'notesList/sendDataToServer'
     }),
 
+    getNoteById (id) {
+      return this.notes.find(note => note.id === id)
+    },
+
+    getIndexById (id) {
+      return this.notes.findIndex(note => note.id === id)
+    },
+
+    getFilteredIndexById (id) {
+      return this.notesFiltered.findIndex(note => note.id === id)
+    },
+
     inputText (data) {
-      const noteIndex = data[0]
+      const currentNote = this.getNoteById(data[0])
       const rowIndex = data[1]
       const text = data[2]
 
       if (rowIndex === 'title') {
-        this.notes[noteIndex].title = text
+        currentNote.title = text
         return
       }
 
-      this.notes[noteIndex].rows[rowIndex].text = text
+      currentNote.rows[rowIndex].text = text
     },
 
-    addTitle (noteIndex) {
-      this.notes[noteIndex].title = ''
+    addTitle (id) {
+      const currentNote = this.getNoteById(id)
+      const noteIndex = this.getFilteredIndexById(id)
+      currentNote.title = ''
       this.setFocusToRow(noteIndex, true)
     },
 
-    addRow (noteIndex) {
-      this.notes[noteIndex].rows.push({
-        id: this.setUniqueId(this.notes[noteIndex].rows),
+    addRow (id) {
+      const noteIndex = this.getFilteredIndexById(id)
+      const currentNote = this.getNoteById(id)
+      currentNote.rows.push({
+        id: this.setUniqueId(currentNote.rows),
         text: '',
         checked: false
       })
@@ -87,26 +106,27 @@ export default {
     },
 
     removeRow (data) {
-      const rowIndex = data[0]
-      const noteIndex = data[1]
+      const currentNote = this.getNoteById(data[0])
+      const rowIndex = data[1]
 
       if (rowIndex === 'title') {
-        this.notes[noteIndex].title = false
+        currentNote.title = false
         return
       }
-      this.notes[noteIndex].rows.splice(rowIndex, 1)
+      currentNote.rows.splice(rowIndex, 1)
     },
 
     toggleCheckRow (data) {
-      const rowIndex = data[0]
-      const noteIndex = data[1]
+      const currentNote = this.getNoteById(data[0])
+      const rowIndex = data[1]
 
-      this.notes[noteIndex].rows[rowIndex].checked = !this.notes[noteIndex].rows[rowIndex].checked
+      currentNote.rows[rowIndex].checked = !currentNote.rows[rowIndex].checked
     },
 
     addNote () {
+      const newId = this.setUniqueId(this.notes)
       this.notes.push({
-        id: this.setUniqueId(this.notes),
+        id: newId,
         background: '',
         title: false,
         rows: [
@@ -117,14 +137,20 @@ export default {
           }
         ]
       })
-      this.setFocusToRow(this.notes.length - 1)
+      this.setFocusToRow(this.notesFiltered.length - 1)
     },
 
-    removeNoteToTrash (noteIndex) {
-      this.notes[noteIndex].trash = true
+    removeNoteToTrash (id) {
+      // need force update for reactive
+      const trashedNote = {
+        ...this.getNoteById(id),
+        trash: true
+      }
+      this.notes.splice(this.getIndexById(id), 1, trashedNote)
     },
 
-    removeNoteAlways (noteIndex) {
+    removeNoteAlways (id) {
+      const noteIndex = this.notes.findIndex(note => note.id === id)
       this.notes.splice(noteIndex, 1)
     },
 
@@ -132,7 +158,7 @@ export default {
       this.$nextTick(() => {
         if (!title) {
           this.$refs.AppNoteOne[noteIndex].setFocusToRow(
-            this.notes[noteIndex].rows.length
+            this.notesFiltered[noteIndex].rows.length
           )
           return
         }
@@ -141,10 +167,10 @@ export default {
     },
 
     setBackgroundNote (data) {
-      const noteIndex = data[0]
+      const currentNote = this.getNoteById(data[0])
       const background = data[1]
 
-      this.notes[noteIndex].background = background
+      currentNote.background = background
     },
 
     setUniqueId (arr) {

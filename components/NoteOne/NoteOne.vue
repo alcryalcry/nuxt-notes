@@ -1,7 +1,7 @@
 <template lang="pug">
   .note(:class="[{ isFocused: isFocused }, note.background]")
 
-    .note__title-wrapper
+    .note__title-wrapper(:class="{ isHidden: note.title === false }")
       h5.note__title(
         contenteditable="true"
         data-placeholder="Добавить заголовок"
@@ -101,14 +101,14 @@ export default {
   methods: {
     inputText (rowIndex, $event) {
       this.$emit('input-text', [
-        this.noteIndex,
+        this.note.id,
         rowIndex,
         $event.currentTarget.textContent
       ])
     },
 
     toggleCheckRow (rowIndex) {
-      this.$emit('toggle-check-row', [rowIndex, this.noteIndex])
+      this.$emit('toggle-check-row', [this.note.id, rowIndex])
     },
 
     setCursorToEnd (el) {
@@ -143,11 +143,11 @@ export default {
     },
 
     addTitle () {
-      this.$emit('add-title')
+      this.$emit('add-title', this.note.id)
     },
 
     addRow () {
-      this.$emit('add-row')
+      this.$emit('add-row', this.note.id)
     },
 
     setFocusToRow (data) {
@@ -159,15 +159,15 @@ export default {
     },
 
     removeRow (rowIndex) {
-      this.$emit('remove-row', [rowIndex, this.noteIndex])
+      this.$emit('remove-row', [this.note.id, rowIndex])
     },
 
     removeNote () {
-      this.$emit('remove-note')
+      this.$emit('remove-note', this.note.id)
     },
 
     setBackgroundNote (background) {
-      this.$emit('set-background-note', [this.noteIndex, background])
+      this.$emit('set-background-note', [this.note.id, background])
     }
   }
 }

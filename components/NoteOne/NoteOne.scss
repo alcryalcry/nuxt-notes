@@ -1,21 +1,7 @@
-.notes-enter-active,
-.notes-leave-active {
-  transform-origin: top left;
-  transition: opacity $trans, transform $trans;
-}
-
-.notes-leave-to {
-  opacity: 0;
-  transform: scale(0);
-}
-
-.notes-enter {
-  opacity: 0;
-  transform: translateY(1rem);
-}
-
 .note {
   position: relative;
+  display: flex;
+  flex-flow: column nowrap;
   padding: 2rem 0 0;
   width: 100%;
   border: 1px solid $bordergray;
@@ -46,6 +32,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
     padding: 2rem;
     opacity: 0;
     pointer-events: none;
@@ -191,6 +178,10 @@
     padding: 0 4rem 1rem 2rem;
     font-size: 1.6rem;
 
+    & + .note__row-remove {
+      top: 0.25rem;
+    }
+
     &:empty:not(:focus):before {
       content: attr(data-placeholder);
       color: $lightgray2;
@@ -227,7 +218,7 @@
       text-decoration-color: $lightgray2;
 
       .note__row-label {
-        border-color: $lightgray2;
+        border-color: rgba($lightgray2, .35);
 
         svg {
           position: absolute;
@@ -344,7 +335,7 @@
     right: -1rem;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
@@ -367,8 +358,8 @@
     }
 
     svg {
-      width: 1.7rem;
-      height: 1.7rem;
+      width: 1.8rem;
+      height: 1.8rem;
     }
   }
 }

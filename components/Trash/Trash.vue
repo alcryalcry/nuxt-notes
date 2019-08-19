@@ -16,28 +16,28 @@
           div(:key="2" v-else)
             span Changes saved
 
-    transition-group.row.gut.notes__container(
+    transition-group.notes__container(
       mode="out-in"
       name="notes"
       tag="div"
       v-if="notes.length"
     )
-      .col-3.col-t-6(
-        v-for="(note, index) in notes"
+      .notes__item(
+        v-for="(note, index) in notesFiltered"
         :key="note.id"
-        v-if="note.trash"
+        ref="gridItems"
       )
-        app-note-one(
+        app-note-one.js-item-wrapper(
           ref="AppNoteOne"
           :note-index="index"
           :note="note"
-          @set-background-note="setBackgroundNote"
-          @add-title="addTitle(index)"
-          @add-row="addRow(index)"
-          @remove-row="removeRow"
-          @toggle-check-row="toggleCheckRow"
-          @remove-note="removeNoteAlways(index)"
+          @add-row="addRow"
+          @add-title="addTitle"
           @input-text="inputText"
+          @remove-row="removeRow"
+          @remove-note="removeNoteAlways"
+          @set-background-note="setBackgroundNote"
+          @toggle-check-row="toggleCheckRow"
         )
     .title(v-else) Корзина пуста
 </template>
@@ -54,18 +54,14 @@ export default {
     iconPlus
   },
   mixins: [notesActions],
-  created () {
-    this.getServerData().then((res) => {
-      this.notes = JSON.parse(JSON.stringify(res.notes)).filter(item => item.trash === true)
-      this.isReady = true
-      this.$nextTick(() => {
-        this.isFirstLoad = false
-      })
-    })
+  computed: {
+    notesFiltered () {
+      return this.notes.filter(item => item.trash)
+    }
   }
 }
 </script>
 
 <style lang="scss">
-@import './Trash.scss';
+@import '../Notes/Notes.scss';
 </style>

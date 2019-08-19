@@ -94,14 +94,19 @@ module.exports = function (params, res) {
           checked: true
         },
         {
+          id: 21231121324,
+          text: 'set unique id через reduce',
+          checked: false
+        },
+        {
           id: 2123112132424322321312312312321,
           text: 'Сделать страницу корзины',
-          checked: false
+          checked: true
         },
         {
           id: 213123213123123,
           text: 'max-height для карточек',
-          checked: false
+          checked: true
         },
         {
           id: 777777,
@@ -116,6 +121,11 @@ module.exports = function (params, res) {
         {
           id: 11,
           text: 'Вёрстка на ГРИДАХ',
+          checked: true
+        },
+        {
+          id: 121212,
+          text: 'sticky шапка (для корзины тоже)',
           checked: false
         },
         {
@@ -241,7 +251,7 @@ module.exports = function (params, res) {
           id: 2132131,
           text: 'SVG-спрайт для Gulp',
           checked: true
-        },
+        }
       ]
     },
     {
@@ -262,5 +272,5 @@ module.exports = function (params, res) {
 
   res.jsonp({
     notes
-  });
-};
+  })
+}

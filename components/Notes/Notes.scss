@@ -1,4 +1,17 @@
 .notes {
+  &__container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    grid-auto-flow: dense;
+  }
+
+  &__item {
+    display: flex;
+  }
+
   &__head {
     display: flex;
     justify-content: space-between;
@@ -30,6 +43,11 @@
     opacity: 0.5;
     color: $gray;
 
+    .content {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
 
     .preloader {
       position: absolute;
