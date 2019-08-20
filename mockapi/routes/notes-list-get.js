@@ -119,6 +119,11 @@ module.exports = function (params, res) {
           checked: false
         },
         {
+          id: 1311223344,
+          text: 'Авторизация',
+          checked: false
+        },
+        {
           id: 11,
           text: 'Вёрстка на ГРИДАХ',
           checked: true
