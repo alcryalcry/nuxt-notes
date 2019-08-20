@@ -144,6 +144,11 @@ module.exports = function (params, res) {
           checked: false
         },
         {
+          id: 151515,
+          text: 'Очистить корзину (и текст для пустой корзины)',
+          checked: false
+        },
+        {
           id: 14,
           text: '(Необязательно) Оповещения о сохраненных изменениях',
           checked: true
