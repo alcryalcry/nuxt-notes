@@ -1,48 +1,49 @@
 <template lang="pug">
   .notes(:class="{ isReady }")
     .preloader(v-if="!isReady")
-    .notes__head
-      .title Notes
-      .notes__head-actions
-        transition-group.notes__head-info(
-          mode="out-in"
-          tag="div"
-          v-if="isShowInfo"
-        )
-          div(:key="1" v-if="isSaving")
-            span Saving...
-            .preloader
-          div(:key="2" v-else)
-            span Changes saved
-        button.notes__add(@click="addNote")
-          .notes__add-icon
-            icon-plus
-          | New note
+    .notes__head(ref="header" :class="{ isSidebarOpen: getSidebarStatus }")
+      .container
+        .title {{ title }}
+        .notes__head-actions
+          transition-group.notes__head-info(
+            mode="out-in"
+            tag="div"
+            v-if="isShowInfo"
+          )
+            div(:key="1" v-if="isSaving")
+              span Saving...
+              .preloader
+            div(:key="2" v-else)
+              span Changes saved
+          button.notes__add(@click="addNote" v-if="!isTrash")
+            .notes__add-icon
+              icon-plus
+            | New note
 
-    transition-group.notes__container(
-      mode="out-in"
-      name="notes"
-      tag="div"
-      v-if="notes"
-    )
-      .notes__item(
-        v-for="(note, index) in notesFiltered"
-        :key="note.id"
-        ref="gridItems"
+    .container
+      transition-group.notes__container(
+        mode="out-in"
+        name="notes"
+        tag="div"
+        v-if="notes"
       )
-        app-note-one.js-item-wrapper(
-          ref="AppNoteOne"
-          :note-index="index"
-          :note="note"
-          @add-row="addRow"
-          @add-title="addTitle"
-          @input-text="inputText"
-          @remove-row="removeRow"
-          @remove-note="removeNoteToTrash"
-          @set-background-note="setBackgroundNote"
-          @toggle-check-row="toggleCheckRow"
+        .notes__item(
+          v-for="(note, index) in notesFiltered"
+          :key="note.id"
+          ref="gridItems"
         )
-          //- @remove-note="removeNoteAlways(index)"
+          app-note-one.js-item-wrapper(
+            ref="AppNoteOne"
+            :note-index="index"
+            :note="note"
+            @add-row="addRow"
+            @add-title="addTitle"
+            @input-text="inputText"
+            @remove-row="removeRow"
+            @remove-note="isTrash ? removeNoteAlways() : removeNoteToTrash()"
+            @set-background-note="setBackgroundNote"
+            @toggle-check-row="toggleCheckRow"
+          )
 </template>
 
 <script>
@@ -57,8 +58,22 @@ export default {
     iconPlus
   },
   mixins: [notesActions],
+  props: {
+    isTrash: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: 'TODO Notes'
+    }
+  },
   computed: {
     notesFiltered () {
+      // TODO: пофиксить удаление
+      if (this.isTrash) {
+        return this.notes.filter(item => item.trash)
+      }
       return this.notes.filter(item => !item.trash)
     }
   }

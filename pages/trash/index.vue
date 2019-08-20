@@ -1,17 +1,15 @@
 <template lang="pug">
   div
-    section.section
-      .container
-        app-trash
+    notes(title="Trash" :isTrash="true")
 
 </template>
 
 <script>
-import AppTrash from '~/components/Trash/Trash.vue'
+import Notes from '~/components/Notes/Notes.vue'
 
 export default {
   components: {
-    AppTrash
+    Notes
   }
 }
 </script>

@@ -117,7 +117,7 @@ a {
 }
 
 .link {
-  transition: $trans;
+  transition: $t;
 }
 
 [v-cloak] {
@@ -163,7 +163,7 @@ a {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .4s ease
+  transition: opacity $t
 }
 
 .fade-enter, 
@@ -177,7 +177,7 @@ a {
 .notes-enter-active,
 .notes-leave-active {
   transform-origin: top left;
-  transition: opacity $trans, transform $trans;
+  transition: opacity $t, transform $t;
 }
 
 .notes-leave-to {

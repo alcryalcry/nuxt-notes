@@ -95,8 +95,8 @@ module.exports = function (params, res) {
         },
         {
           id: 21231121324,
-          text: 'set unique id через reduce',
-          checked: false
+          text: 'new set unique id',
+          checked: true
         },
         {
           id: 2123112132424322321312312312321,
@@ -126,12 +126,12 @@ module.exports = function (params, res) {
         {
           id: 121212,
           text: 'sticky шапка (для корзины тоже)',
-          checked: false
+          checked: true
         },
         {
           id: 12,
           text: 'Мобильный интерфейс',
-          checked: false
+          checked: true
         },
         {
           id: 15,

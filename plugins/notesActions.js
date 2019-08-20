@@ -22,7 +22,15 @@ export default {
       })
     })
   },
+  computed: {
+    ...mapGetters({
+      getSidebarStatus: 'sidebar/getSidebarStatus'
+    })
+  },
   mounted () {
+    this.stickyHeader()
+    window.addEventListener('scroll', debounce(25, this.stickyHeader), false)
+
     this.debounceSendData = debounce(1000, () => {
       this.setNotesList(JSON.parse(JSON.stringify(this.notes)))
       this.sendDataToServer().then((res) => {
@@ -38,6 +46,9 @@ export default {
     })
   },
   watch: {
+    getSidebarStatus () {
+      this.stickyHeader()
+    },
     notes: {
       handler (val) {
         if (this.isFirstLoad) { return }
@@ -61,6 +72,17 @@ export default {
       getServerData: 'notesList/getServerData',
       sendDataToServer: 'notesList/sendDataToServer'
     }),
+
+    stickyHeader () {
+      const wrapper = this.$refs.header
+      if (wrapper) {
+        if (window.pageYOffset > 30) {
+          wrapper.classList.add('isScrolled')
+        } else if (window.pageYOffset < 20) {
+          wrapper.classList.remove('isScrolled')
+        }
+      }
+    },
 
     getNoteById (id) {
       return this.notes.find(note => note.id === id)
@@ -97,8 +119,10 @@ export default {
     addRow (id) {
       const noteIndex = this.getFilteredIndexById(id)
       const currentNote = this.getNoteById(id)
+      const newId = this.setUniqueId()
+
       currentNote.rows.push({
-        id: this.setUniqueId(currentNote.rows),
+        id: newId,
         text: '',
         checked: false
       })
@@ -124,11 +148,12 @@ export default {
     },
 
     addNote () {
-      const newId = this.setUniqueId(this.notes)
+      const newId = this.setUniqueId()
       this.notes.push({
         id: newId,
         background: '',
         title: false,
+        trash: false,
         rows: [
           {
             id: 0,
@@ -150,7 +175,7 @@ export default {
     },
 
     removeNoteAlways (id) {
-      const noteIndex = this.notes.findIndex(note => note.id === id)
+      const noteIndex = this.getIndexById(id)
       this.notes.splice(noteIndex, 1)
     },
 
@@ -173,15 +198,8 @@ export default {
       currentNote.background = background
     },
 
-    setUniqueId (arr) {
-      const ids = arr.map(item => item.id)
-      let newId = 0
-
-      for (let i = 0; ids.includes(i); i++) {
-        newId = i + 1
-      }
-
-      return newId
+    setUniqueId () {
+      return Math.random().toString(36).substr(2, 9)
     }
   }
 }

@@ -6,7 +6,7 @@
   width: 100%;
   border: 1px solid $bordergray;
   border-radius: 0.5rem;
-  transition: opacity $trans, transform $trans, background-color $trans;
+  transition: opacity $t, transform $t, background-color $t;
 
   @include desktop {
     &:hover {
@@ -36,7 +36,7 @@
     padding: 2rem;
     opacity: 0;
     pointer-events: none;
-    transition: opacity $trans;
+    transition: opacity $t;
   }
 
   &__title-wrapper {
@@ -59,7 +59,7 @@
     background-color: transparent;
     cursor: pointer;
     pointer-events: auto;
-    transition: background-color $trans, opacity $trans;
+    transition: background-color $t, opacity $t;
 
     &:active {
       background-color: $bordergray;
@@ -95,7 +95,7 @@
     color: $lightgray2;
     background-color: transparent;
     cursor: pointer;
-    transition: background-color $trans, opacity 0.2s 0.2s $easeOutCubic;
+    transition: background-color $t, opacity 0.2s 0.2s $easeOutCubic;
 
     &:active {
       background-color: $bordergray;
@@ -120,12 +120,6 @@
         opacity: 1;
         transform: translateY(0.5rem);
         transition: 0.4s $easeOutCubic;
-
-        @for $num from 1 through 30 {
-          &:nth-of-type(#{$num}) {
-            transition-delay: #{$num * 0.04}s;
-          }
-        }
       }
     }
   }
@@ -152,7 +146,7 @@
       border-radius: 50%;
       background: $black;
       opacity: 0;
-      transition: opacity $trans;
+      transition: opacity $t;
     }
 
     &:active {
@@ -203,7 +197,7 @@
     line-height: 1.25;
     text-decoration: line-through;
     text-decoration-color: transparent;
-    transition: text-decoration $trans, color $trans;
+    transition: text-decoration $t, color $t;
 
     @include desktop {
       &:hover {
@@ -234,7 +228,7 @@
     &--add {
       color: $lightgray2;
       cursor: pointer;
-      transition: opacity $trans;
+      transition: opacity $t;
 
       @include desktop {
         opacity: 0.75;
@@ -264,7 +258,7 @@
     border-radius: 3px;
     color: $black;
     cursor: pointer;
-    transition: border-color $trans;
+    transition: border-color $t;
     z-index: 1;
 
     &:active {
@@ -291,7 +285,7 @@
 
     svg {
       opacity: 0;
-      transition: opacity $trans;
+      transition: opacity $t;
     }
   }
 
@@ -314,7 +308,7 @@
     cursor: pointer;
     color: $gray;
     opacity: 0;
-    transition: opacity $trans, color $trans;
+    transition: opacity $t, color $t;
     z-index: 1;
 
     @include desktop {
@@ -343,7 +337,7 @@
     color: $white;
     cursor: pointer;
     z-index: 1;
-    transition: opacity $trans, background-color $trans, color $trans;
+    transition: opacity $t, background-color $t, color $t;
 
     &:active {
       background-color: $black;
@@ -351,10 +345,13 @@
 
     @include desktop {
       opacity: 0;
-
       &:hover {
         background-color: $black;
       }
+    }
+    @include mobile {
+      width: 2.5rem;
+      height: 2.5rem;
     }
 
     svg {
@@ -367,7 +364,7 @@
 .isHidden {
   opacity: 0;
   pointer-events: none;
-  transition: opacity $trans;
+  transition: opacity $t;
 }
 
 .isCyan {
