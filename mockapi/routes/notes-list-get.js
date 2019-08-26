@@ -137,21 +137,6 @@ module.exports = function (params, res) {
           id: 151515,
           text: 'Очистить корзину (и текст для пустого компонента Notes)',
           checked: false
-        },
-        {
-          id: 1311223344,
-          text: 'Авторизация',
-          checked: false
-        },
-        {
-          id: 15,
-          text: 'Оповещения об удалении и возможности вернуть изменения',
-          checked: false
-        },
-        {
-          id: 13,
-          text: 'Хранение данных в MongoDb',
-          checked: false
         }
       ]
     },
