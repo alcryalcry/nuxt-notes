@@ -40,7 +40,7 @@
             @add-title="addTitle"
             @input-text="inputText"
             @remove-row="removeRow"
-            @remove-note="isTrash ? removeNoteAlways() : removeNoteToTrash()"
+            @remove-note="removeNote"
             @set-background-note="setBackgroundNote"
             @toggle-check-row="toggleCheckRow"
           )
@@ -70,7 +70,6 @@ export default {
   },
   computed: {
     notesFiltered () {
-      // TODO: пофиксить удаление
       if (this.isTrash) {
         return this.notes.filter(item => item.trash)
       }

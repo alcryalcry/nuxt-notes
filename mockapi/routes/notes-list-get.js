@@ -111,17 +111,7 @@ module.exports = function (params, res) {
         {
           id: 777777,
           text: 'Обработка ошибок при потере соединения (localStorage итд)',
-          checked: false
-        },
-        {
-          id: 13,
-          text: 'Хранение данных в MongoDb',
-          checked: false
-        },
-        {
-          id: 1311223344,
-          text: 'Авторизация',
-          checked: false
+          checked: true
         },
         {
           id: 11,
@@ -139,19 +129,29 @@ module.exports = function (params, res) {
           checked: true
         },
         {
+          id: 14,
+          text: '(Необязательно) Оповещения о сохраненных изменениях',
+          checked: true
+        },
+        {
+          id: 151515,
+          text: 'Очистить корзину (и текст для пустого компонента Notes)',
+          checked: false
+        },
+        {
+          id: 1311223344,
+          text: 'Авторизация',
+          checked: false
+        },
+        {
           id: 15,
           text: 'Оповещения об удалении и возможности вернуть изменения',
           checked: false
         },
         {
-          id: 151515,
-          text: 'Очистить корзину (и текст для пустой корзины)',
+          id: 13,
+          text: 'Хранение данных в MongoDb',
           checked: false
-        },
-        {
-          id: 14,
-          text: '(Необязательно) Оповещения о сохраненных изменениях',
-          checked: true
         }
       ]
     },

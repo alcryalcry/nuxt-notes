@@ -13,8 +13,9 @@ export default {
     isReady: false
   }),
   created () {
-    this.getServerData().then(() => {
-      this.notes = JSON.parse(JSON.stringify(this.getNotesList()))
+    this.getServerData().then((notes) => {
+      this.notes = JSON.parse(JSON.stringify(notes))
+    }).then(() => {
       this.isReady = true
       this.$nextTick(() => {
         this.isFirstLoad = false
@@ -34,7 +35,6 @@ export default {
     this.debounceSendData = debounce(1000, () => {
       this.setNotesList(JSON.parse(JSON.stringify(this.notes)))
       this.sendDataToServer().then((res) => {
-        console.log('CHANGES SAVED!', res)
       })
         .catch((error) => {
           console.error(error)
@@ -165,18 +165,19 @@ export default {
       this.setFocusToRow(this.notesFiltered.length - 1)
     },
 
-    removeNoteToTrash (id) {
-      // need force update for reactive
-      const trashedNote = {
-        ...this.getNoteById(id),
-        trash: true
-      }
-      this.notes.splice(this.getIndexById(id), 1, trashedNote)
-    },
-
-    removeNoteAlways (id) {
+    removeNote (id) {
       const noteIndex = this.getIndexById(id)
-      this.notes.splice(noteIndex, 1)
+
+      if (this.isTrash) {
+        this.notes.splice(noteIndex, 1)
+      } else {
+        // need force update for reactive
+        const trashedNote = {
+          ...this.getNoteById(id),
+          trash: true
+        }
+        this.notes.splice(noteIndex, 1, trashedNote)
+      }
     },
 
     setFocusToRow (noteIndex, title) {
