@@ -18,8 +18,8 @@ export const mutations = {
 }
 
 export const actions = {
-  getServerData ({ commit }, userId) {
-    return HTTP.get(API_ROUTES_NOTES_LIST_GET, { user_id: userId })
+  getServerData ({ commit }) {
+    return HTTP.get(API_ROUTES_NOTES_LIST_GET)
       .then(({ data }) => {
         commit('setNotesList', data.notes)
         return data.notes
@@ -35,10 +35,9 @@ export const actions = {
       })
   },
   // eslint-disable-next-line no-unused-vars
-  sendDataToServer ({ commit, getters }, userId) {
+  sendDataToServer ({ commit, getters }) {
     window.localStorage.setItem('notes', JSON.stringify(getters.getNotesList))
     return HTTP.post(API_ROUTES_NOTES_LIST_SET, {
-      user_id: userId,
       notes: getters.getNotesList
     })
       .then(({ data }) => {
