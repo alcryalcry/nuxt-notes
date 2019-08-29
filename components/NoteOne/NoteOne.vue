@@ -4,7 +4,7 @@
     .note__title-wrapper(:class="{ isHidden: note.title === false }")
       h5.note__title(
         contenteditable="true"
-        data-placeholder="Добавить заголовок"
+        data-placeholder="Add title"
         ref="title"
         v-show="needTitle"
         v-text="note.title"
@@ -45,7 +45,7 @@
 
     .note__actions
       button.note__title-button(
-        title="Добавить заголовок"
+        title="Add title"
         :class="{ isHidden: needTitle }"
         @click="addTitle"
       )
