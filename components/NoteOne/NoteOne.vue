@@ -40,7 +40,7 @@
           icon-plus
         .note__row-text New item
 
-    .note__remove(@click="removeNote")
+    .note__remove(@click="removeNote" :class="{ isTrash }")
       icon-close
 
     .note__actions
@@ -80,9 +80,9 @@ export default {
       type: Object,
       required: true
     },
-    noteIndex: {
-      type: Number,
-      default: null
+    isTrash: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

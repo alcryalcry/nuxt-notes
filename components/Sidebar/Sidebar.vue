@@ -1,6 +1,6 @@
 <template lang="pug">
-  nav.sidebar(v-on-clickaway="closeSidebar")
-    button.hamburger(@click="toggleSidebarStatus")
+  nav.sidebar(v-on-clickaway="CLOSE_SIDEBAR")
+    button.hamburger(@click="TOGGLE_SIDEBAR_STATUS")
       icon-burger
     a.sidebar__logo(href="https://alcryalcry.github.io/")
       logo-nuxt
@@ -9,7 +9,7 @@
         .sidebar__title {{ section.title }}
         .sidebar__list
           li( v-for="(link, i) in section.items" :key="i" )
-            nuxt-link.sidebar__link( :to="link.href" @click.native="closeSidebar" )
+            nuxt-link.sidebar__link( :to="link.href" @click.native="CLOSE_SIDEBAR" )
               .sidebar__link-icon
                 component(:is="link.icon")
               .sidebar__link-text {{ link.text }}
@@ -67,13 +67,9 @@ export default {
   },
   methods: {
     ...mapMutations({
-      toggleSidebarStatus: 'sidebar/toggleSidebarStatus',
-      closeSidebar: 'sidebar/closeSidebar'
+      TOGGLE_SIDEBAR_STATUS: 'sidebar/TOGGLE_SIDEBAR_STATUS',
+      CLOSE_SIDEBAR: 'sidebar/CLOSE_SIDEBAR'
     })
-    // ...mapMutations('sidebar', [
-    //   'toggleSidebarStatus',
-    //   'closeSidebar'
-    // ]),
   }
 }
 </script>

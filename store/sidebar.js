@@ -3,14 +3,14 @@ export const state = () => ({
 })
 
 export const getters = {
-  getSidebarStatus: state => state.sidebarStatus
+  GET_SIDEBAR_STATUS: state => state.sidebarStatus
 }
 
 export const mutations = {
-  toggleSidebarStatus (state) {
+  TOGGLE_SIDEBAR_STATUS (state) {
     state.sidebarStatus = !state.sidebarStatus
   },
-  closeSidebar (state) {
+  CLOSE_SIDEBAR (state) {
     if (state.sidebarStatus === true) {
       state.sidebarStatus = false
     }

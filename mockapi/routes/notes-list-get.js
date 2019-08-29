@@ -136,7 +136,7 @@ module.exports = function (params, res) {
         {
           id: 151515,
           text: 'Очистить корзину (и текст для пустого компонента Notes)',
-          checked: false
+          checked: true
         }
       ]
     },

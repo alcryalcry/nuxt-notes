@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="{'isSidebarOpen': getSidebarStatus}")
+  div(:class="{'isSidebarOpen': GET_SIDEBAR_STATUS}")
     app-sidebar
     nuxt(class="page-content")
 
@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getSidebarStatus: 'sidebar/getSidebarStatus'
+      GET_SIDEBAR_STATUS: 'sidebar/GET_SIDEBAR_STATUS'
     }),
     scrollBarOptions () {
       return {
@@ -25,7 +25,7 @@ export default {
     }
   },
   watch: {
-    getSidebarStatus (value) {
+    GET_SIDEBAR_STATUS (value) {
       if (value) {
         disableBodyScroll(document.querySelector('body'), this.scrollBarOptions)
         return false

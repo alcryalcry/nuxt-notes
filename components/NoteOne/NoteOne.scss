@@ -339,6 +339,10 @@
     z-index: 1;
     transition: opacity $t, background-color $t, color $t;
 
+    &.isTrash {
+      transform: rotate(45deg);
+    }
+
     &:active {
       background-color: $black;
     }

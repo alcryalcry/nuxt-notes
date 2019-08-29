@@ -12,8 +12,13 @@ export default {
     isShowInfo: false,
     isReady: false
   }),
-  created () {
-    this.getServerData().then((notes) => {
+  computed: {
+    ...mapGetters({
+      GET_SIDEBAR_STATUS: 'sidebar/GET_SIDEBAR_STATUS'
+    })
+  },
+  mounted () {
+    this.GET_SERVER_DATA().then((notes) => {
       this.notes = JSON.parse(JSON.stringify(notes))
     }).then(() => {
       this.isReady = true
@@ -22,19 +27,13 @@ export default {
         grid(this.$refs.gridItems)
       })
     })
-  },
-  computed: {
-    ...mapGetters({
-      getSidebarStatus: 'sidebar/getSidebarStatus'
-    })
-  },
-  mounted () {
+
     this.stickyHeader()
     window.addEventListener('scroll', debounce(25, this.stickyHeader), false)
 
     this.debounceSendData = debounce(1000, () => {
-      this.setNotesList(JSON.parse(JSON.stringify(this.notes)))
-      this.sendDataToServer().then((res) => {
+      this.SET_NOTES_LIST(JSON.parse(JSON.stringify(this.notes)))
+      this.SEND_DATA_TO_SERVER().then((res) => {
       })
         .catch((error) => {
           console.error(error)
@@ -46,7 +45,7 @@ export default {
     })
   },
   watch: {
-    getSidebarStatus () {
+    GET_SIDEBAR_STATUS () {
       this.stickyHeader()
     },
     notes: {
@@ -63,14 +62,14 @@ export default {
   },
   methods: {
     ...mapGetters({
-      getNotesList: 'notesList/getNotesList'
+      GET_NOTES_LIST: 'notesList/GET_NOTES_LIST'
     }),
     ...mapMutations({
-      setNotesList: 'notesList/setNotesList'
+      SET_NOTES_LIST: 'notesList/SET_NOTES_LIST'
     }),
     ...mapActions({
-      getServerData: 'notesList/getServerData',
-      sendDataToServer: 'notesList/sendDataToServer'
+      GET_SERVER_DATA: 'notesList/GET_SERVER_DATA',
+      SEND_DATA_TO_SERVER: 'notesList/SEND_DATA_TO_SERVER'
     }),
 
     stickyHeader () {
@@ -166,10 +165,12 @@ export default {
     },
 
     removeNote (id) {
+      const currentNote = this.getNoteById(id)
       const noteIndex = this.getIndexById(id)
 
       if (this.isTrash) {
-        this.notes.splice(noteIndex, 1)
+        currentNote.trash = false
+        // this.notes.splice(noteIndex, 1)
       } else {
         // need force update for reactive
         const trashedNote = {
@@ -178,6 +179,10 @@ export default {
         }
         this.notes.splice(noteIndex, 1, trashedNote)
       }
+    },
+
+    clearTrash () {
+      this.notes = JSON.parse(JSON.stringify(this.notes.filter(item => !item.trash)))
     },
 
     setFocusToRow (noteIndex, title) {

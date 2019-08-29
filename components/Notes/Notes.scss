@@ -25,6 +25,11 @@
     }
   }
 
+  .empty-text {
+    font-size: 2.5rem;
+    color: $gray;
+  }
+
   &__head {
     position: sticky;
     position: -webkit-sticky;
@@ -163,6 +168,11 @@
     }
     @include mobile {
       opacity: 1;
+    }
+    &.isTrash {
+      svg {
+        transform: rotate(45deg);
+      }
     }
     svg {
       width: 2.4rem;
