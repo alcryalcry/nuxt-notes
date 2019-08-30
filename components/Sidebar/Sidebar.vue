@@ -2,7 +2,7 @@
   nav.sidebar(v-on-clickaway="CLOSE_SIDEBAR")
     button.hamburger(@click="TOGGLE_SIDEBAR_STATUS")
       icon-burger
-    a.sidebar__logo(href="https://alcryalcry.github.io/")
+    a.sidebar__logo(href="https://main.alcryalcry.now.sh/")
       logo-nuxt
     .sidebar__section-wrapper
       .sidebar__section( v-for="(section, i) in menuSections" :key="i" )
