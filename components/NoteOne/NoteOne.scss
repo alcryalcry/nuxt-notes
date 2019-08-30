@@ -34,9 +34,12 @@
     align-items: center;
     margin-top: auto;
     padding: 2rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity $t;
+    
+    @include desktop {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity $t;
+    }
   }
 
   &__title-wrapper {

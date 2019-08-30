@@ -16,12 +16,12 @@ html {
     font-size: calc(10px + 13 * (100vw - 375px) / 447);
   }
 
-  @media screen and (min-width: 768px) and (max-width: 1023px) {
-    font-size: calc(10px + 4 * (100vw - 768px) / 255);
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    font-size: calc(10px + 4 * (100vw - 768px) / 256);
   }
 
-  @media (min-width: 1024px)  and (max-width: 1360px) {
-    font-size: calc(8px + 2 * (100vw - 1024px) / 336);
+  @media (min-width: 1025px)  and (max-width: 1360px) {
+    font-size: calc(8px + 2 * (100vw - 1024px) / 335);
   }
 
   // popup bugfix in iOS

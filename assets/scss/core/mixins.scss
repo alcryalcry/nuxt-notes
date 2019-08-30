@@ -1,5 +1,5 @@
 $widthTablet: 768px;
-$widthDesktop: 1024px;
+$widthDesktop: 1025px;
 
 @mixin mobile {
   @media (max-width: #{$widthTablet - 1px}) {
