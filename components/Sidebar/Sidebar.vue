@@ -2,7 +2,7 @@
   nav.sidebar(v-on-clickaway="CLOSE_SIDEBAR")
     button.hamburger(@click="TOGGLE_SIDEBAR_STATUS")
       icon-burger
-    a.sidebar__logo(href="https://main.alcryalcry.now.sh/")
+    a.sidebar__logo(href="https://thealexcode.com/")
       logo-nuxt
     .sidebar__section-wrapper
       .sidebar__section( v-for="(section, i) in menuSections" :key="i" )
@@ -44,27 +44,25 @@ export default {
     logoNuxt
   },
   mixins: [clickaway],
-  data () {
-    return {
-      menuSections: [
-        {
-          title: 'Views',
-          items: [
-            {
-              href: '/',
-              text: 'Notes',
-              icon: iconNotes
-            },
-            {
-              href: '/trash',
-              text: 'Trash',
-              icon: iconTrash
-            }
-          ]
-        }
-      ]
-    }
-  },
+  data: () => ({
+    menuSections: [
+      {
+        title: 'Views',
+        items: [
+          {
+            href: '/',
+            text: 'Notes',
+            icon: iconNotes
+          },
+          {
+            href: '/trash',
+            text: 'Trash',
+            icon: iconTrash
+          }
+        ]
+      }
+    ]
+  }),
   methods: {
     ...mapMutations({
       TOGGLE_SIDEBAR_STATUS: 'sidebar/TOGGLE_SIDEBAR_STATUS',

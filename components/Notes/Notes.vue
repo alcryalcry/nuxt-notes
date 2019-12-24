@@ -55,11 +55,11 @@
               @set-background-note="setBackgroundNote"
               @toggle-check-row="toggleCheckRow"
             )
-        .empty-text(
+        p.empty-text(
           key="2"
           v-if="isReady && !notesFiltered.length"
+          v-html="emptyText"
         )
-          p(v-for="text in emptyText") {{ text }}
 </template>
 
 <script>
@@ -86,21 +86,10 @@ export default {
   },
   computed: {
     emptyText () {
-      if (this.isTrash) {
-        return [
-          "There's nothing here!"
-        ]
-      }
-      return [
-        "Add a note using the 'New note' button.",
-        'Notes are stored in local storage only in this browser.'
-      ]
+      return this.isTrash ? "There's nothing here!" : "Add a note using the 'New note' button. <br/>Notes are stored in local storage only in this browser."
     },
     notesFiltered () {
-      if (this.isTrash) {
-        return this.notes.filter(item => item.trash)
-      }
-      return this.notes.filter(item => !item.trash)
+      return this.notes.filter(item => this.isTrash ? item.trash : !item.trash)
     }
   }
 }
